@@ -1,3 +1,4 @@
+import Agenda from "../modelos/agenda";
 import Cliente from "../modelos/cliente";
 import Endereco from "../modelos/endereco";
 import Telefone from "../modelos/telefone";
@@ -20,7 +21,10 @@ cliente.endereco = endereco;
 let telefone = new Telefone();
 telefone.ddd = "12";
 telefone.numero = "91111-1111";
-cliente.telefones.push(telefone);
+
+let agenda = new Agenda();
+agenda.telefones.push(telefone);
+cliente.agenda = agenda;
 
 let dependente = new Cliente();
 dependente.nome = `Isabel Cristina Leopoldina Augusta Micaela`;
@@ -28,13 +32,13 @@ dependente.nomeSocial = `Princesa Isabel`;
 dependente.dataCadastro = new Date(1921, 10, 14);
 dependente.dataNascimento = new Date(1846, 6, 29);
 dependente.endereco = cliente.endereco.clonar() as Endereco;
-
-cliente.telefones.forEach((telefone) => {
-  dependente.telefones.push(telefone.clonar() as Telefone);
-});
+dependente.agenda = cliente.agenda.clonar() as Agenda;
 
 dependente.titular = cliente;
 cliente.dependentes.push(dependente);
 
-console.log(cliente);
-console.log(dependente);
+console.log("CLIENTE: ", cliente);
+console.log("DEPENDENTE: ", dependente);
+
+// console.log("CLIENTE AGENDA: ", cliente.agenda.telefones);
+// console.log("DEPENDENTE AGENDA: ", dependente.agenda.telefones);
